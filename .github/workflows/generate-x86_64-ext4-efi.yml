@@ -11,16 +11,16 @@ on:
       #   description: '指定 ImmortalWrt 版本'
       #   required: true
       #   default: '23.05.4'
-      rootfs_size:
-        description: '选择 RootFS 分区大小'
-        required: true
-        default: '800'
-        type: choice
-        options:
-          - '800'
-          - '2000'
-          - '4000'
-          - '5600'
+
+      # rootfs_size:
+      #   description: '选择 RootFS 分区大小'
+      #   required: true
+      #   default: '800'
+      #   type: choice
+      #   options:
+      #     - '800'
+      #     - '2000'
+      #     - '5600'
       
       upload-all:
         description: 将编译出的镜像上传到 Artifacts
@@ -41,7 +41,7 @@ on:
       release_version:
         description: 'GitHub Release'
         required: false
-        default: '1.0.0-ext4-efi-only'
+        default: '1.0.0-ext4-efi'
 
 
 env:
@@ -56,9 +56,10 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      VERSION: "23.05.4"
       # VERSION: ${{ github.event.inputs.version }}
-      ROOTFS_SIZE: ${{ github.event.inputs.rootfs_size }}
+      # ROOTFS_SIZE: ${{ github.event.inputs.rootfs_size }}
+      VERSION: '23.05.4'
+      ROOTFS_SIZE: '2000'
       RELEASE_VERSION: ${{ github.event.inputs.release_version }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -96,7 +97,7 @@ jobs:
       - name: Run Patch and DIY Scripts
         working-directory: ${{ env.VENDOR }}-imagebuilder-${{ env.VERSION }}-x86-64.Linux-x86_64
         run: |
-          bash scripts/builder-patch-ext4-efi-only.sh
+          bash scripts/builder-patch-ext4-efi.sh
           bash scripts/clash.sh
           bash scripts/zsh.sh
           
