@@ -30,6 +30,7 @@ PACKAGES+=" luci-i18n-samba4-zh-cn"        # Samba 网络共享
 PACKAGES+=" luci-i18n-vsftpd-zh-cn"        # FTP 服务器
 
 # Docker 组件
+PACKAGES+=" luci-i18n-docker-zh-cn"
 PACKAGES+=" luci-i18n-dockerman-zh-cn"
 PACKAGES+=" docker-compose"
 
